@@ -1,0 +1,12 @@
+<h1>{{name}}</h1>
+<h2>{{address}}</h2>
+<h3>{{company}}</h3>
+<table>
+    <tr>
+      <th>Name</th> <!-- Table header -->
+    </tr>
+    <tr *ngFor="let name of listOfPlayers">
+      <td>{{ name }}</td> <!-- Table cell displaying player's name -->
+    </tr>
+  </table>
+  
