@@ -10,7 +10,7 @@ import { DetailsPageComponentComponent } from './Routes/details-page-component/d
 
 @Component({
   selector: 'app-root',
-  imports: [ MainPageComponent],
+  imports: [ MainPageComponent,RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone:true
