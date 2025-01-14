@@ -1,0 +1,76 @@
+<div class="container">
+    <h2>Template Form Example</h2>
+    
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" novalidate>
+      <div>
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          required
+          minlength="4"
+          ngModel
+         
+        />
+        <div
+        *ngIf="taskForm?.controls?.['fullName']?.touched && taskForm?.controls?.['fullName']?.invalid"
+        >
+        <div>
+          <span *ngIf="taskForm?.controls?.['fullName']?.errors?.['required']">
+            Full Name is required.
+          </span>
+          <span *ngIf="taskForm?.controls?.['fullName']?.errors?.['minlength']">
+            Name should be of 4 character.
+          </span>
+        </div>
+      </div>
+      <div>
+        <label for="address1">Address 1</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          ngModel
+         
+        />
+      </div>
+  
+      <div>
+        <label for="phoneNumber">Phone Number</label>
+        <input
+          type="number"
+          id="phoneNumber"
+          name="phoneNumber"
+          ngModel
+        />
+      </div>
+      <div>
+        <label for="age">Age</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          ngModel
+        />
+      </div>
+      <div>
+        <label for="district">District</label>
+        <input
+          type="text"
+          id="district"
+          name="district"
+          [required]="taskForm?.controls?.['address']?.value!==''"
+          ngModel
+        />
+        <div *ngIf="taskForm?.controls?.['address']?.value!=='' && taskForm?.controls?.['district']?.errors?.['required']">
+          <span>If there is address then you have to enter district.</span>
+        </div>
+      </div>
+      <button type="submit" [disabled]="taskForm.invalid">Submit</button>
+      </div>
+      
+    </form>
+    <div class="successMessage">{{successMessage}}</div>
+  
+  
