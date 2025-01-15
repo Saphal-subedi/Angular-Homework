@@ -5,7 +5,9 @@ import { NgModule } from '@angular/core';
 import { LandingPageComponent } from './Form/landing-page/landing-page.component';
 
 export const routes: Routes = [
-  {path:'',component:LandingPageComponent},
-    { path: 'CricketerTablePage', component: MainPageComponent}, 
-  { path: 'details/:cricketerId', component: DetailsPageComponentComponent  } 
+  // {path:'',component:LandingPageComponent},
+  //   { path: 'CricketerTablePage', component: MainPageComponent}, 
+  // { path: 'details/:cricketerId', component: DetailsPageComponentComponent  } 
+
+  {path: '',loadChildren: () => import('./Module/test-module/test-module.module').then(m => m.TestModuleModule)} //lazy loading
 ];
