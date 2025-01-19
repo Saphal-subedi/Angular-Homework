@@ -7,7 +7,7 @@ import { Book } from '../Model/Book';
 export class BookServiceService {
 
   books:Book[]=[
-     {id:1,name:"Muna Madan",authors:"Laxmi Prasad Devkota",publication:"Readers",priceForNepal:100,priceForIndia:160}
+     {id:1,name:"Muna Madan",authors:["Laxmi Prasad Devkota"],publication:"Readers",priceForNepal:100,priceForIndia:160}
   ]
   constructor() { }
    addBook(book:Book):void
@@ -18,6 +18,16 @@ export class BookServiceService {
   getAllBook():Book[]
   {
     return this.books;
+  }
+  onPriceChange(from: string,price:number): number {
+    if (from === 'nepal') {
+     return  parseFloat((price * 1.6).toFixed(2));  
+    } else if (from === 'india') {
+    return parseFloat((price / 1.6).toFixed(2)); 
+    }
+    else{
+      return 0;
+    }
   }
 
 }

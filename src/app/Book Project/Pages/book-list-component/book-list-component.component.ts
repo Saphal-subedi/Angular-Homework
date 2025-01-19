@@ -26,5 +26,9 @@ export class BookListComponentComponent implements OnInit{
   {
     this.router.navigate(['/addbook']);
   }
+  viewDetails(bookId:number):void{
+    this.router.navigate([`details/${bookId}`]);
+  }
+
 
 }

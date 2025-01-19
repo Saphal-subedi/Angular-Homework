@@ -4,6 +4,7 @@ import { DetailsPageComponentComponent } from './Routes/details-page-component/d
 import { NgModule } from '@angular/core';
 import { LandingPageComponent } from './Form/landing-page/landing-page.component';
 import { AddBookComponentComponent } from './Book Project/Pages/add-book-component/add-book-component.component';
+import { BookDetailComponentComponent } from './Book Project/Pages/book-detail-component/book-detail-component.component';
 
 export const routes: Routes = [
   // {path:'',component:LandingPageComponent},
@@ -12,5 +13,6 @@ export const routes: Routes = [
 //--If you are doing lazy loading in component then use loadComponent and if you are doing lazy loading in module then use loadChildren---->
   //{path: '',loadChildren: () => import('./Book Project/Pages/book-list-component/book-list-component.component').then(m => m.BookListComponentComponent)} ,//lazy loading
   {path: '',loadComponent: () => import('./Book Project/Pages/book-list-component/book-list-component.component').then(m => m.BookListComponentComponent)},
-  {path:'addbook',component:AddBookComponentComponent}
+  {path:'addbook',component:AddBookComponentComponent},
+  {path:'details/:bookId',component:BookDetailComponentComponent}
 ];

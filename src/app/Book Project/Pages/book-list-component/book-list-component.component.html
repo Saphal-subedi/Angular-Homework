@@ -18,7 +18,7 @@
                 <td>{{book.priceForNepal}}</td>
                 <td>{{book.priceForIndia}}</td>
                 <td>{{book.publication}}</td>
-                <td><button>View</button></td>
+                <td><button (click)="viewDetails(book.id)">View</button></td>
                 <td><button>Update</button></td>
             </tr>
         </tbody>
