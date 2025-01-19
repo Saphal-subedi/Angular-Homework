@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BookServiceService } from '../../Service/book-service.service';
 import { Book } from '../../Model/Book';
 import { CommonModule } from '@angular/common';
@@ -18,25 +18,28 @@ export class AddBookComponentComponent implements OnInit {
   priceForNepal: number = 0; 
   priceForIndia: number = 0;
 
-  constructor(private bookService: BookServiceService,private router:Router) {
-    this.bookForm = new FormGroup({
-      id: new FormControl(null),
-      name: new FormControl('', Validators.required),
-      authors: new FormArray([],Validators.minLength(1)),
-      priceForNepal: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
-      priceForIndia: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
-      publication: new FormControl(null),
+  constructor(private bookService: BookServiceService,private router:Router,private formBuilder:FormBuilder) {
+
+    this.bookForm = formBuilder.group({
+      id:[''],
+      name: ['', Validators.required],
+      authors: formBuilder.array([formBuilder.control('',Validators.required)]),
+      priceForNepal:['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      priceForIndia: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      publication: ['']
     });
   }
   ngOnInit(): void {
     this.newId = Math.max(...this.bookService.getAllBook().map(book => book.id))+1;
     this.bookForm.patchValue({id:this.newId})
-    this.addAuthor()
     
   }
 
   get authors():FormArray {
     return (this.bookForm.get('authors') as FormArray);
+  }
+  isAuthorInvalid(): boolean {
+    return this.authors.length === 0 || this.authors.controls.every(control => !control.value.trim());
   }
 
   addAuthor():void {
